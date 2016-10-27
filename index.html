@@ -1,50 +1,127 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/1.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Introduction to GNUPG</h1>
+          <p>Secure communication tool</p>
+        </section>
+        <section>
+          <h2>Cryptography</h2>
+          <ul>
+            <li/>Practice and study of techniques for secure communication
+            <li/>Constructing and analyzing protocols that prevent third parties or the public from reading private messages
+          </ul>
+        </section>
+        <section>
+          <section>
+            <h2>Concepts</h2>
+          </section>
+          <section>
+            <h3>Symmetric ciphers</h3>
+          </section>
+          <section>
+            <h3>Public-key ciphers</h3>
+          </section>
+          <section>
+            <h3>Hybrid ciphers</h3>
+          </section>
+          <section>
+            <h3>Digital signatures</h3>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Generating a new keypair</h3>
+            <pre>
+              <code>
+                $ gpg --gen-key
+                gpg (GnuPG) 0.9.4; Copyright (C) 1999 Free Software Foundation, Inc.
+                This program comes with ABSOLUTELY NO WARRANTY.
+                This is free software, and you are welcome to redistribute it
+                under certain conditions. See the file COPYING for details.
+                Please select what kind of key you want:
+                (1) DSA and ElGamal (default)
+                (2) DSA (sign only)
+                (4) ElGamal (sign and encrypt)
+                Your selection?
+                About to generate a new ELG-E keypair.
+                minimum keysize is 768 bits
+                default keysize is 1024 bits
+                highest suggested keysize is 2048 bits
+                What keysize do you want? (1024)
+                Please specify how long the key should be valid.
+                0 = key does not expire
+                < n> = key expires in n days
+                < n>w = key expires in n weeks
+                < n>m = key expires in n months
+                < n>y = key expires in n years
+                Key is valid for? (0)
+                You need a User-ID to identify your key; the software constructs the user id
+                from Real Name, Comment and Email Address in this form:
+                "Heinrich Heine (Der Dichter) < heinrichh@duesseldorf.de>"
+                Real name:
+                You need a Passphrase to protect your private key.
+                Enter passphrase:
+              </code>
+            </pre>
+          </section>
+          <section class="inline-pre">
+            <h3>Exchanging keys</h3>
+            <pre><code>$ gpg --list-keys</code></pre><p> to see your public keyring</p>
+            <pre><code>$ gpg --output alice.gpg --export alice@email.com</code></pre><p> to export your a public key</p>
+            <pre><code>$ gpg --import alice.gpg</code></pre><p> to add a public key to your keyring</p>
+          </section>
+          <section>
+            <h3>Encrypting and decrypting documents</h3>
+            <p>Encrypting a document: </p>
+            <pre><code>$ gpg --output doc.gpg --encrypt --recipient
+blake@cyb.org doc</code></pre>
+            <p>Decrypting a document: </p>
+            <pre><code>$ gpg --output doc --decrypt doc.gpg</code></pre>
+          </section>
+        </section>
+      </div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
 </html>
